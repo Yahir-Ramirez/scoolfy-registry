@@ -2,6 +2,7 @@ package com.scoolfy.registry.infrastructure.mapper;
 
 import com.scoolfy.registry.application.command.RegisterStudentCommand;
 import com.scoolfy.registry.domain.model.dto.StudentDto;
+import com.scoolfy.registry.domain.model.request.RegistryStudentRequest;
 import com.scoolfy.registry.persistence.entity.Grade;
 import com.scoolfy.registry.persistence.entity.Student;
 import com.scoolfy.registry.persistence.entity.User;
@@ -24,4 +25,16 @@ public interface StudentMapper {
     Student toEntity(RegisterStudentCommand cmd, User user, Grade grade);
 
     List<Student> toStudentList(List<StudentDto> studentDtos);
+
+    @Mapping(target = "firstName", source = "idUser.firstName")
+    @Mapping(target = "secondName", source = "idUser.secondName")
+    @Mapping(target = "firstLastName", source = "idUser.firstLastName")
+    @Mapping(target = "secondLastName", source = "idUser.secondLastName")
+    @Mapping(target = "email", source = "idUser.email")
+    @Mapping(target = "idStudent", source = "idUser.identification")
+    @Mapping(target = "grade", source = "gradeGroup.gradeUnit")
+    @Mapping(target = "group", source = "gradeGroup.groupUnit")
+    RegistryStudentRequest toRequest(Student student);
+
+    List<RegistryStudentRequest> toRequestList(List<Student> students);
 }
