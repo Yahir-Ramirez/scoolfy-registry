@@ -1,0 +1,1 @@
+# scoolfy-registry
